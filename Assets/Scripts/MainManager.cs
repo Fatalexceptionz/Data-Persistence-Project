@@ -11,6 +11,7 @@ public class MainManager : MonoBehaviour
     public Rigidbody Ball;
 
     public Text ScoreText;
+    public Text HighScoreText;
     public GameObject GameOverText;
     
     private bool m_Started = false;
@@ -66,6 +67,24 @@ public class MainManager : MonoBehaviour
     {
         m_Points += point;
         ScoreText.text = $"Score : {m_Points}";
+        UpdateBestScore();
+    }
+
+    void UpdateBestScore()
+    {
+        if(Persistence.Instance != null)
+        {
+            Persistence persistence = Persistence.Instance;
+            if (m_Points > persistence.highScore)
+            {
+                persistence.highScore = m_Points;
+                persistence.highScorePlayerName = persistence.playerName;
+
+            }
+
+            HighScoreText.text = $"Best Score : {persistence.highScorePlayerName} : {persistence.highScore}";
+        }
+
     }
 
     public void GameOver()
