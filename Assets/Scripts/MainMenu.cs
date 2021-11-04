@@ -9,14 +9,23 @@ using UnityEditor;
 
 public class MainMenu : MonoBehaviour
 {
+    private void Start()
+    {
+        string name = Persistence.Instance.highScorePlayerName;
+        int score = Persistence.Instance.highScore;
+
+        Text text = GameObject.Find("BestScore").GetComponent<Text>();
+
+        text.text = $"Best Score : {name} : {score}";
+
+    }
+
 
     public void StartGame()
     {
-        if(Persistence.Instance != null)
-        {
-            string text = GameObject.Find("PlayerName").GetComponent<InputField>().text;
-            Persistence.Instance.playerName = text;
-        }
+        string text = GameObject.Find("PlayerName").GetComponent<InputField>().text;
+        Persistence.Instance.playerName = text;
+
         SceneManager.LoadScene(1);
     }
 
