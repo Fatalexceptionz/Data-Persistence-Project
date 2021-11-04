@@ -93,5 +93,7 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+
+        Persistence.Instance.SaveScore();
     }
 }
